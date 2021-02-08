@@ -93,6 +93,11 @@ struct thread
     /* Shared between thread.c and synch.c. */
     struct list_elem elem;              /* List element. */
 
+/*---------------------------------------------------------*/
+    uint64_t sleep_time; /* Time a thread should stay asleep | Javier Donado - 17001625 */
+/*---------------------------------------------------------*/
+
+
 #ifdef USERPROG
     /* Owned by userprog/process.c. */
     uint32_t *pagedir;                  /* Page directory. */
@@ -125,6 +130,12 @@ const char *thread_name (void);
 
 void thread_exit (void) NO_RETURN;
 void thread_yield (void);
+
+/*---------------------------------------------------------*/
+void insert_in_waiting_list(int64_t ticks); //JD 17001625
+void remove_sleeping_thread(int64_t ticks); //JD 17001625
+/*---------------------------------------------------------*/
+
 
 /* Performs some operation on thread t, given auxiliary data AUX. */
 typedef void thread_action_func (struct thread *t, void *aux);
