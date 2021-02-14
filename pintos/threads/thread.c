@@ -388,12 +388,34 @@ thread_foreach (thread_action_func *func, void *aux)
       func (t, aux);
     }
 }
+/*---------------------------------------------------------*/
+//Priority Donor function using PRI_MIN(0), PRI_MAX(63), PRI_DEFAULT(31)
+//JD - 17001625
+void priority_donor(int priority){
+
+  if(thread_current()->priority == PRI_MIN){
+    thread_current()->priority == PRI_MAX;
+  }
+  //else if(thread_current()->priority  )
+
+}
+/*---------------------------------------------------------*/
 
 /* Sets the current thread's priority to NEW_PRIORITY. */
 void
 thread_set_priority (int new_priority) 
 {
+  int candidate_priority = 0; //JD - 17001625 Thread priority to evaluate if it needs a new set_priority
+  candidate_priority = thread_current()->priority; //JD -17001625 candidate priority value is saved
   thread_current ()->priority = new_priority;
+
+/*---------------------------------------------------------*/
+  //JD - 17001625
+  if(candidate_priority > thread_current()->priority){ //If current_threads ends up with a priority which isn't the highest, it yields()
+    thread_yield();
+  }
+/*---------------------------------------------------------*/
+
 }
 
 /* Returns the current thread's priority. */
