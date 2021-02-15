@@ -408,7 +408,15 @@ thread_set_priority (int new_priority)
   int candidate_priority = 0; //JD - 17001625 Thread priority to evaluate if it needs a new set_priority
   candidate_priority = thread_current()->priority; //JD -17001625 candidate priority value is saved
   thread_current ()->priority = new_priority;
+/*-----------------------------------------------------------------*/
+  
+  struct list_elem *e = list_begin (&ready_list); //PA - 17001969 Buscamos los threads en la readylist
 
+  while(e != list_end(&ready_list)){
+    // terminar codigo del while
+  }
+
+/*-----------------------------------------------------------------*/
 /*---------------------------------------------------------*/
   //JD - 17001625
   if(candidate_priority > thread_current()->priority){ //If current_threads ends up with a priority which isn't the highest, it yields()
