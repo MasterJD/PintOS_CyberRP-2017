@@ -414,6 +414,12 @@ thread_set_priority (int new_priority)
 
   while(e != list_end(&ready_list)){
     // terminar codigo del while
+    priority_donor(new_priority);
+
+    if(candidate_priority > thread_current()->priority){ //VR-17001623 ---terminar implementacion 14/02/2021
+      thread_yield();
+    }
+
   }
 
 /*-----------------------------------------------------------------*/
