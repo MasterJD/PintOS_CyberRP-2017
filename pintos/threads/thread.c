@@ -419,10 +419,19 @@ thread_set_priority (int new_priority)
 }
 
 /* Returns the current thread's priority. */
+
 int
 thread_get_priority (void) 
 {
-  return thread_current ()->priority;
+  /*---------------------------------------------------------*/
+  //EG - 17002247
+  enum intr_level old_level; //deshabilita ls interrupciones
+  old_level = intr_disable(); 
+/*---------------------------------------------------------*/
+
+
+  return thread_current ()->priority; 
+  
 }
 
 /* Sets the current thread's nice value to NICE. */
